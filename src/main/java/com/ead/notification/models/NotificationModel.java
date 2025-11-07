@@ -10,8 +10,8 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "TB_NOTIFICATIONS")
-public class NotificationModel {
 
+public class NotificationModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID notificationId;
@@ -31,4 +31,28 @@ public class NotificationModel {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private NotificationStatus notificationStatus;
+
+    public void setNotificationId(UUID notificationId) {
+        this.notificationId = notificationId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public void setNotificationStatus(NotificationStatus notificationStatus) {
+        this.notificationStatus = notificationStatus;
+    }
 }

@@ -24,5 +24,7 @@ public class NotificationConsumer {
             exchange = @Exchange(value = "${ead.broker.exchange.notificationCommandExchange}", type = ExchangeTypes.TOPIC, ignoreDeclarationExceptions = "true"),
             key = "${ead.broker.key.notificationCommandKey}"
     ))
-    public void listen(@Payload NotificationRecordCommandDto notificationRecordCommandDto) {}
+    public void listen(@Payload NotificationRecordCommandDto notificationRecordCommandDto) {
+        notificationService.saveNotification(notificationRecordCommandDto);
+    }
 }
