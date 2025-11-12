@@ -6,11 +6,14 @@ import com.ead.notification.models.NotificationModel;
 import com.ead.notification.repositories.NotificationRepository;
 import com.ead.notification.services.NotificationService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.UUID;
 
 @Service
 public class NotificationServiceImpl implements NotificationService {
@@ -29,5 +32,12 @@ public class NotificationServiceImpl implements NotificationService {
         notificationModel.setNotificationStatus(NotificationStatus.CREATED);
 
         return notificationRepository.save(notificationModel);
+    }
+
+    @Override
+    public Page<NotificationModel> findAllNotificationsByUser(
+            UUID userId, Pageable pageable) {
+        return notificationRepository.findAllByUserIdAndNotificationStatus(
+                userId, NotificationStatus.CREATED, pageable);
     }
 }
