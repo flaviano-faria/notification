@@ -49,7 +49,7 @@ public class UserNotificationController {
         UserDetailsImpl userDetails = authenticationCurrentUserService.getCurrentUser();
         if(userDetails.getUserId().equals(userId) || userDetails.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(notificationService.updateNotification(notificationRecordDto, notificationService.findByNotificationIdAndUserId(notificationId, userId).get()));
+                    .body(notificationService.updateNotification(notificationRecordDto, notificationService.findNotificationIdAndUserId(notificationId, userId).get()));
         } else {
             throw new AccessDeniedException("Forbidden");
         }
